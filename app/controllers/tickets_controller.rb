@@ -87,6 +87,19 @@ class TicketsController < ApplicationController
     end
   end
 
+  def process_text
+    data = []
+
+    params['text'].each_line do |line|
+      description, amount_cents = line.split(/\t/)
+      description.strip!
+      amount_cents.strip!
+      data << [ description, amount_cents.to_i ]
+    end
+
+    render json: data
+  end
+
   private
 
   # Use callbacks to share common setup or constraints between actions.

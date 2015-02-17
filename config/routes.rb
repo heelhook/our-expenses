@@ -4,6 +4,7 @@ Rails.application.routes.draw do
   resources :tickets do
     get 'assign', on: :member
     post 'assign', on: :member
+    post 'process_text', on: :collection
   end
 
   resources :expenses do

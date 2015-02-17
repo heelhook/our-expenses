@@ -25,6 +25,19 @@
     = render partial: 'item_fields', f: item
   .links
     = link_to_add_association 'Add ticket item', f, :items, class: 'btn btn-primary'
+    |  
+    a.btn.btn-default[href='#textarea-modal'] Enter items via text
   .form-actions
     = f.submit class: 'btn btn-default'
     = link_to 'Cancel', tickets_path, class: 'btn'
+
+#textarea-modal.modal.fade
+  .modal-dialog
+    .modal-content
+      .modal-header
+        h4 Enter text
+      .modal-body
+        = text_area_tag 'items_textarea', '', class: 'col-md-12'
+      .modal-footer
+        a.btn.btn-default[href='#' data-dismiss="modal"] Cancel
+        a.btn.btn-primary[href='#'] Process
