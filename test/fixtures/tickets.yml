@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  category: MyString
+  company: MyString
+  paid_by_id: 
+  reviewed: false
+
+two:
+  category: MyString
+  company: MyString
+  paid_by_id: 
+  reviewed: false

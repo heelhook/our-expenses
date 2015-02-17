@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  paid_by_id: 
+  paid_to_id: 
+  amount: 
+  memo: MyText
+
+two:
+  paid_by_id: 
+  paid_to_id: 
+  amount: 
+  memo: MyText

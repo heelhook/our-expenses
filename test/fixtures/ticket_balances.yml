@@ -1,0 +1,11 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  ticket_id: 
+  owed_by_id: 
+  amount: 
+
+two:
+  ticket_id: 
+  owed_by_id: 
+  amount: 

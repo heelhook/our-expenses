@@ -1,0 +1,45 @@
+p#notice
+  = notice
+h1
+  | Listing Payments
+table.table
+  thead
+    tr
+      th
+        | Paid by
+      th
+        | Paid to
+      th
+        | Paid for
+      th
+        | Amount
+      th
+        | Memo
+      th[colspan="3"]
+  tbody
+    - @payments.each do |payment|
+      tr
+        td
+          = payment.paid_by.name
+        td
+          - if payment.paid_to
+            = payment.paid_to.name
+          - elsif payment.ticket
+            = link_to payment.ticket.company, ticket_path(payment.ticket)
+        td
+          - if payment.ticket
+            p= link_to "Ticket #{payment.ticket.category}/#{payment.ticket.company} (#{payment.ticket.created_at.strftime('%d/%m')})", ticket_path(payment.ticket)
+          - payment.tickets.each do |ticket|
+            p= link_to "Ticket #{ticket.category}/#{ticket.company} (#{ticket.created_at.strftime('%d/%m')})", ticket_path(ticket)
+        td
+          = payment.amount
+        td
+          = payment.memo
+        td
+          = link_to 'Show', payment
+        td
+          = link_to 'Edit', edit_payment_path(payment)
+        td
+          = link_to 'Destroy', payment, method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to 'New Payment', new_payment_path, class: 'btn btn-primary'

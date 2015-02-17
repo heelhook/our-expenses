@@ -1,0 +1,30 @@
+= form_for(@ticket) do |f|
+  - if @ticket.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@ticket.errors.count, "error")
+        |  prohibited this ticket from being saved:
+      ul
+        - @ticket.errors.full_messages.each do |message|
+          li
+            = message
+  .form-group
+    label.control-label Category
+    = f.text_field :category, class: 'form-control'
+  .form-group
+    label.control-label Company
+    = f.text_field :company, class: 'form-control'
+  .form-group
+    label.control-label Paid by
+    = f.collection_select :paid_by_id, User.all, :id, :name
+  .form-group
+    label.control-label Reviewed?
+    = f.check_box :reviewed
+  h3 Ticket Items
+  = f.fields_for :items do |item|
+    = render partial: 'item_fields', f: item
+  .links
+    = link_to_add_association 'Add ticket item', f, :items, class: 'btn btn-primary'
+  .form-actions
+    = f.submit class: 'btn btn-default'
+    = link_to 'Cancel', tickets_path, class: 'btn'

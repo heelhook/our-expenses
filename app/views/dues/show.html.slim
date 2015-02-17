@@ -1,0 +1,25 @@
+p#notice
+  = notice
+p
+  strong
+    | Due by:
+  = @due.due_by
+p
+  strong
+    | Due to:
+  = @due.due_to
+p
+  strong
+    | Due from:
+  = @due.due_from
+p
+  strong
+    | Amount:
+  = @due.amount
+p
+  strong
+    | Payment:
+  = @due.payment
+= link_to 'Edit', edit_due_path(@due)
+|  | 
+= link_to 'Back', dues_path

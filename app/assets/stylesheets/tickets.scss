@@ -1,0 +1,19 @@
+// Place all the styles related to the Tickets controller here.
+// They will automatically be included in application.css.
+// You can use Sass (SCSS) here: http://sass-lang.com/
+
+.assign {
+  .cell {
+    border: solid 1px #cccccc;
+  }
+
+  .float {
+    float: left;
+    margin-left: 50px;
+    text-align: center;
+
+    a.btn {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,17 @@
+#navbar.navbar.navbar-default
+  a.navbar-brand href='#' 
+    i.icon-beer
+    | Hierapolis
+  ul.nav.navbar-nav.pull-right
+    li.dropdown.user
+      a.dropdown-toggle 'data-toggle' => 'dropdown' href='#' 
+        i.icon-user
+        strong= current_user.name
+        =image_tag 'http://lorempixel.com/output/fashion-q-c-20-20-4.jpg', width: '20px', height: '20px', class: 'img-rounded'
+        b.caret
+      ul.dropdown-menu
+        li
+          a href='#'  Edit Profile
+        li.divider
+        li
+          =link_to 'Sign out', 'index.html'

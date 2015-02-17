@@ -1,0 +1,7 @@
+.nested-fields
+  .row
+    .col-md-8
+      = f.text_field :description, class: 'form-control', placeholder: 'Description'
+    .col-md-3
+      = f.number_field :amount_cents, class: 'form-control'
+    = link_to_remove_association "x", f

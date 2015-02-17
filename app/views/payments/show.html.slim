@@ -1,0 +1,25 @@
+p#notice
+  = notice
+p
+  strong
+    | Paid by:
+  = @payment.paid_by
+p
+  strong
+    | Paid to:
+  = @payment.paid_to
+p
+  strong
+    | Ticket:
+  = @payment.ticket
+p
+  strong
+    | Amount:
+  = @payment.amount
+p
+  strong
+    | Memo:
+  = @payment.memo
+= link_to 'Edit', edit_payment_path(@payment)
+|  | 
+= link_to 'Back', payments_path

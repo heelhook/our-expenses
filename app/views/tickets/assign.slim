@@ -1,0 +1,26 @@
+h1 Assign expenses
+
+h3= @ticket.company
+
+= form_tag assign_ticket_path(@ticket) do
+  .assign
+    - @ticket.items.each do |item|
+      .cell.col-md-4[data-id=item.id]
+        h5 Who should pay for?
+        h3
+          = item.description
+          |  
+          a.btn.btn-default.btn-xs[data-role="split"] Split 50/50
+
+        - User.all.each do |user|
+          - percentage = user.percentage_for_item(item, 0.5) * 100.0
+          .float
+            input.dial[name="t#{item.id}_#{user.id}" type="text" data-angleOffset=-125 data-angleArc=250 data-width=100 data-height=100 data-step="5" value=percentage.to_i id="#{item.id}_#{user.id}"]
+            a.btn[href='#' data-role="assign-me" data-target="##{item.id}_#{user.id}"]= user.name
+        .clear
+
+  .row
+    .col-md-6
+      p
+      p
+      = submit_tag "Save", class: 'btn btn-primary'

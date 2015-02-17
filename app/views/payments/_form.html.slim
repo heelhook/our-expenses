@@ -1,0 +1,64 @@
+= form_for(@payment) do |f|
+  - if @payment.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@payment.errors.count, "error")
+        |  prohibited this payment from being saved:
+      ul
+        - @payment.errors.full_messages.each do |message|
+          li
+            = message
+  .field
+    = f.label :paid_by_id
+    br
+    - if @payment.autocalculated
+      = @payment.paid_by.name
+      = f.hidden_field :paid_by_id
+    - else
+      = f.collection_select :paid_by_id, User.all, :id, :name
+  .field
+    = f.label :paid_to_id
+    br
+    - if @payment.autocalculated
+      = @payment.paid_to.name
+      = f.hidden_field :paid_to_id
+    - else
+      = f.collection_select :paid_to_id, User.all, :id, :name
+
+  - if @payment.dues.any?
+    .row
+      .col-md-12
+        table.table
+          thead
+            tr
+              th Due by
+              th Due to
+              th Due from
+              th Amount
+          tbody
+            - @payment.dues.each do |due|
+              = hidden_field_tag 'dues[]', due.id
+              tr
+                td= due.due_by.name
+                td= due.due_to.name
+                td= "#{due.due_from.company} (#{due.due_from.created_at.strftime('%d/%m')})"
+                td= humanized_money_with_symbol due.amount
+  - else
+    .field
+      = f.label :ticket_id
+      br
+      = f.text_field :ticket_id
+  .field
+    = f.label :amount
+    br
+    - if @payment.autocalculated
+      = humanized_money_with_symbol @payment.amount
+      = f.hidden_field :amount_cents
+    - else
+      = f.number_field :amount
+  .field
+    = f.label :memo
+    br
+    = f.text_area :memo, class: 'form-control'
+  .form-actions
+    = f.submit "Record Payment", class: 'btn btn-primary'

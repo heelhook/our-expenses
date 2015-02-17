@@ -1,0 +1,29 @@
+p#notice
+  = notice
+p
+  strong
+    | Category:
+  = @expense.category
+p
+  strong
+    | Company:
+  = @expense.company
+p
+  strong
+    | Amount:
+  = @expense.amount
+p
+  strong
+    | Periodicity:
+  = @expense.periodicity
+p
+  strong
+    | Notes:
+  = @expense.notes
+p
+  strong
+    | Due on:
+  = @expense.due_on
+= link_to 'Edit', edit_expense_path(@expense)
+|  | 
+= link_to 'Back', expenses_path

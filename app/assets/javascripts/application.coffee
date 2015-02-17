@@ -1,0 +1,9 @@
+#= require jquery
+#= require jquery_ujs
+#= require turbolinks
+#= require bootstrap
+#= require bootstrap-sprockets
+#= require hierapolis
+#= require cocoon
+#= require tickets
+#= require dues

@@ -1,0 +1,38 @@
+p#notice
+  = notice
+h1
+  | Listing Dues
+
+a.btn.btn-default[data-role="select-all"] Select All
+
+= form_tag new_payment_path, method: 'get'
+  table.table
+    thead
+      tr
+        th
+          | Due by
+        th
+          | Due to
+        th
+          | Due from
+        th
+          | Amount
+        th[colspan="3"]
+    tbody
+      - @dues.each do |due|
+        tr
+          td
+            = check_box_tag 'dues[]', due.id
+            |  
+            = due.due_by.name
+          td
+            = due.due_to.name
+          td
+            - if due.due_from
+              | #{due.due_from.category} / #{due.due_from.company}
+          td
+            = due.amount
+          td
+  br
+
+  = submit_tag 'Settle marked dues', class: 'btn btn-primary'

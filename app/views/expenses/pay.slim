@@ -1,0 +1,20 @@
+h1 Pay for #{@expense.category}
+
+= form_for @ticket do |f|
+  = f.hidden_field :category
+  = f.hidden_field :company
+  .form-horizontal.col-md-4
+    fieldset
+      .form-group
+        label.control-label To be paid by 
+        = f.collection_select :paid_by_id, User.all, :id, :name
+      .form-group
+        label.control-label Amount cents
+        = text_field_tag 'ticket[items_attributes][1][amount_cents]', @amount_cents, class: 'form-control'
+      .form-group
+        label.control-label Description
+        = text_field_tag 'ticket[items_attributes][1][description]', "#{@expense.category} #{Date.today.strftime('%B')}", class: 'form-control', placeholder: 'Description'
+      = hidden_field_tag 'ticket[items_attributes][1][_destroy]', 'false'
+    .form-actions
+      = f.submit class: 'btn btn-default'
+      = link_to 'Cancel', expenses_path, class: 'btn'

@@ -1,0 +1,32 @@
+= form_for(@due) do |f|
+  - if @due.errors.any?
+    #error_explanation
+      h2
+        = pluralize(@due.errors.count, "error")
+        |  prohibited this due from being saved:
+      ul
+        - @due.errors.full_messages.each do |message|
+          li
+            = message
+  .field
+    = f.label :due_by_id
+    br
+    = f.text_field :due_by_id
+  .field
+    = f.label :due_to_id
+    br
+    = f.text_field :due_to_id
+  .field
+    = f.label :due_from_id
+    br
+    = f.text_field :due_from_id
+  .field
+    = f.label :amount
+    br
+    = f.text_field :amount
+  .field
+    = f.label :payment_id
+    br
+    = f.text_field :payment_id
+  .actions
+    = f.submit

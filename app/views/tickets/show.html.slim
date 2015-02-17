@@ -1,0 +1,50 @@
+p#notice
+  = notice
+p
+  strong
+    | Category:
+  = @ticket.category
+p
+  strong
+    | Company:
+  = @ticket.company
+p
+  strong
+    | Paid by:
+  = @ticket.paid_by.name
+p
+  strong
+    | Reviewed:
+  = @ticket.reviewed
+
+table.table.col-md-6
+  thead
+    tr
+      th Description
+      th Amount
+      - User.all.each do |user|
+        th= user.name
+  tbody
+    - @ticket.items.each do |item|
+      tr
+        td= item.description
+        td= humanized_money_with_symbol item.amount
+        - User.all.each do |user|
+          td= humanized_money_with_symbol item.total_for(user)
+  tfooter
+    tr
+      td Total
+      td= humanized_money_with_symbol @ticket.total
+      - User.all.each do |user|
+        td= humanized_money_with_symbol @ticket.total_for(user)
+
+- @ticket.dues.each do |due|
+  - next if due.paid?
+  p
+    | #{due.due_by.name} should pay 
+    = humanized_money_with_symbol due.amount
+    |  to #{due.due_to.name}
+
+= link_to 'Edit', edit_ticket_path(@ticket), class: 'btn btn-default'
+|  
+= link_to 'Assign', assign_ticket_path(@ticket), class: 'btn btn-default'

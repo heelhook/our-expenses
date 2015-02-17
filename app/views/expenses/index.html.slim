@@ -1,0 +1,39 @@
+p#notice
+  = notice
+h1
+  | Listing Expenses
+table.table
+  thead
+    tr
+      th
+        | Category
+      th
+        | Company
+      th
+        | Amount
+      th
+        | Periodicity
+      th
+        | Due on
+      th[colspan="3"]
+  tbody
+    - @expenses.each do |expense|
+      tr
+        td
+          = expense.category
+        td
+          = expense.company
+        td
+          = humanized_money_with_symbol expense.amount
+        td
+          = expense.periodicity.capitalize
+        td
+          = expense.due_on
+        td
+          = link_to 'Pay', pay_expense_path(expense), class: 'btn btn-primary'
+        td
+          = link_to 'Edit', edit_expense_path(expense)
+        td
+          = link_to 'Destroy', expense, method: :delete, data: { confirm: 'Are you sure?' }
+br
+= link_to 'New Expense', new_expense_path, class: 'btn btn-primary'
