@@ -9,17 +9,14 @@
           li
             = message
   .form-group
-    label.control-label Category
-    = f.text_field :category, class: 'form-control'
-  .form-group
     label.control-label Company
     = f.text_field :company, class: 'form-control'
   .form-group
+    label.control-label Category
+    = f.text_field :category, class: 'form-control'
+  .form-group
     label.control-label Paid by
     = f.collection_select :paid_by_id, User.all, :id, :name
-  .form-group
-    label.control-label Reviewed?
-    = f.check_box :reviewed
   h3 Ticket Items
   = f.fields_for :items do |item|
     = render partial: 'item_fields', f: item
@@ -41,3 +38,12 @@
       .modal-footer
         a.btn.btn-default[href='#' data-dismiss="modal"] Cancel
         a.btn.btn-primary[href='#'] Process
+
+javascript:
+  $(document).ready(function(){
+    var company_names = #{raw Ticket.select(:company).distinct.map(&:company)};
+
+    $('#ticket_company').autocomplete({
+      source: company_names,
+    });
+  })

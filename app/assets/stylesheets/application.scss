@@ -1,3 +1,22 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 @import "hierapolis";
+@import "jquery-ui";
+@import "jquery-ui/autocomplete";
+
+.ui-autocomplete {
+  list-style: none;
+  padding-left: 5px;
+  background-color: white;
+  border: solid #cccccc 1px;
+  max-width: 550px;
+
+  li {
+    padding: 10px;
+
+    &.ui-state-focus {
+      background-color: #4c9ed9;
+      color: white;
+    }
+  }
+}
